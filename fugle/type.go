@@ -9,13 +9,15 @@ import (
 type Response struct {
 	APIVersion string
 	StatusCode int
-	Data       struct {
-		Info   Info
-		Chart  map[time.Time]Deal
-		Quote  Quote
-		Meta   Meta
-		Dealts []Dealt
-	}
+	Data       Data
+}
+
+type Data struct {
+	Info   Info
+	Chart  map[time.Time]Deal
+	Quote  Quote
+	Meta   Meta
+	Dealts []Dealt
 }
 
 type Info struct {

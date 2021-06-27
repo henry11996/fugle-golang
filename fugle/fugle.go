@@ -10,30 +10,30 @@ import (
 )
 
 type Client struct {
-	host     string
-	version  string
-	apiToken string
+	Host     string
+	Version  string
+	ApiToken string
 }
 
 type ClientOption struct {
-	host     string
-	version  string
-	apiToken string
+	Host     string
+	Version  string
+	ApiToken string
 }
 
 func NewFugleClient(opts ClientOption) (Client, error) {
 	client := &Client{
-		host:     opts.host,
-		version:  opts.version,
-		apiToken: opts.apiToken,
+		Host:     opts.Host,
+		Version:  opts.Version,
+		ApiToken: opts.ApiToken,
 	}
-	if client.host == "" {
-		client.host = "api.fugle.tw"
+	if client.Host == "" {
+		client.Host = "api.fugle.tw"
 	}
-	if client.version == "" {
-		client.version = "v0.2"
+	if client.Version == "" {
+		client.Version = "v0.2"
 	}
-	if client.apiToken == "" {
+	if client.ApiToken == "" {
 		return *client, errors.New("please provide fugle api token")
 	}
 
@@ -46,7 +46,7 @@ func (cli *Client) callAPI(endpoint string, params url.Values) (*Response, error
 		return nil, err
 	}
 
-	params.Add("apiToken", cli.apiToken)
+	params.Add("apiToken", cli.ApiToken)
 	targetURL.RawQuery = params.Encode()
 
 	req, err := http.NewRequest("GET", targetURL.String(), nil)
@@ -69,7 +69,7 @@ func (cli *Client) callAPI(endpoint string, params url.Values) (*Response, error
 }
 
 func (cli *Client) Chart(symbolID string, oddLot bool) (*Response, error) {
-	baseUrl := fmt.Sprintf("https://%s/realtime/%s/intraday/chart", cli.host, cli.version)
+	baseUrl := fmt.Sprintf("https://%s/realtime/%s/intraday/chart", cli.Host, cli.Version)
 	params := url.Values{}
 	params.Add("symbolId", symbolID)
 	params.Add("oddLot", strconv.FormatBool(oddLot))
@@ -77,7 +77,7 @@ func (cli *Client) Chart(symbolID string, oddLot bool) (*Response, error) {
 }
 
 func (cli *Client) Quote(symbolID string, oddLot bool) (*Response, error) {
-	baseUrl := fmt.Sprintf("https://%s/realtime/%s/intraday/quote", cli.host, cli.version)
+	baseUrl := fmt.Sprintf("https://%s/realtime/%s/intraday/quote", cli.Host, cli.Version)
 	params := url.Values{}
 	params.Add("symbolId", symbolID)
 	params.Add("oddLot", strconv.FormatBool(oddLot))
@@ -85,7 +85,7 @@ func (cli *Client) Quote(symbolID string, oddLot bool) (*Response, error) {
 }
 
 func (cli *Client) Meta(symbolID string, oddLot bool) (*Response, error) {
-	baseUrl := fmt.Sprintf("https://%s/realtime/%s/intraday/meta", cli.host, cli.version)
+	baseUrl := fmt.Sprintf("https://%s/realtime/%s/intraday/meta", cli.Host, cli.Version)
 	params := url.Values{}
 	params.Add("symbolId", symbolID)
 	params.Add("oddLot", strconv.FormatBool(oddLot))
@@ -93,7 +93,7 @@ func (cli *Client) Meta(symbolID string, oddLot bool) (*Response, error) {
 }
 
 func (cli *Client) Dealts(symbolID string, oddLot bool, limit int64, offset int64) (*Response, error) {
-	baseUrl := fmt.Sprintf("https://%s/realtime/%s/intraday/dealts", cli.host, cli.version)
+	baseUrl := fmt.Sprintf("https://%s/realtime/%s/intraday/dealts", cli.Host, cli.Version)
 	params := url.Values{}
 	params.Add("symbolId", symbolID)
 	params.Add("oddLot", strconv.FormatBool(oddLot))

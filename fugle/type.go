@@ -14,7 +14,7 @@ type Response struct {
 
 type Data struct {
 	Info   Info
-	Chart  map[time.Time]Deal
+	Chart  Chart
 	Quote  Quote
 	Meta   Meta
 	Dealts []Dealt
@@ -22,20 +22,22 @@ type Data struct {
 
 type Info struct {
 	Date          string
-	Mode          string
+	Type          string
+	Exchange      string
+	Market        string
 	SymbolID      string
 	CountryCode   string
 	Timezone      string
 	LastUpdatedAt time.Time
 }
 
-type Deal struct {
-	Open   decimal.Decimal
-	High   decimal.Decimal
-	Low    decimal.Decimal
-	Close  decimal.Decimal
-	Volume decimal.Decimal
-	Unit   decimal.Decimal
+type Chart struct {
+	O []decimal.Decimal
+	H []decimal.Decimal
+	I []decimal.Decimal
+	C []decimal.Decimal
+	V int
+	T int
 }
 
 type Quote struct {
@@ -57,20 +59,29 @@ type Quote struct {
 	PriceHigh      QuotePrice
 	PriceLow       QuotePrice
 	PriceOpen      QuotePrice
+	PriceAvg       QuotePrice
+	PriceLimit     int
 }
 
 type QuoteTotal struct {
-	At     time.Time
-	Order  float32
-	Price  float32
-	Unit   int
-	Volume int
+	At               time.Time
+	Transaction      int
+	TradeValue       decimal.Decimal
+	TradeVolume      int
+	TradeVolumeAtBid int
+	TradeVolumeAtAsk int
+	BidOrders        int
+	AskOrders        int
+	BidVolume        int
+	AskVolume        int
+	Serial           int
 }
 
 type QuoteTrial struct {
 	At     time.Time
+	Bid    decimal.Decimal
+	Ask    decimal.Decimal
 	Price  decimal.Decimal
-	Unit   int
 	Volume int
 }
 
@@ -90,7 +101,6 @@ type QuoteOrder struct {
 
 type BestPrice struct {
 	Price  decimal.Decimal
-	Unit   int
 	Volume int
 }
 
@@ -100,7 +110,6 @@ type QuotePrice struct {
 }
 
 type Meta struct {
-	IsIndex        bool
 	NameZhTw       string
 	IndustryZhTw   string
 	PriceReference decimal.Decimal
@@ -114,7 +123,6 @@ type Meta struct {
 	Currency       string
 	IsTerminated   bool
 	IsSuspended    bool
-	IsWarrant      bool
 	TypeZhTw       string
 	Abnormal       string
 }

@@ -13,11 +13,12 @@ type Response struct {
 }
 
 type Data struct {
-	Info   Info
-	Chart  Chart
-	Quote  Quote
-	Meta   Meta
-	Dealts []Dealt
+	Info    Info
+	Chart   Chart
+	Quote   Quote
+	Meta    Meta
+	Dealts  []Dealt
+	Volumes []BestPrice
 }
 
 type Info struct {
@@ -110,27 +111,30 @@ type QuotePrice struct {
 }
 
 type Meta struct {
-	NameZhTw       string
-	IndustryZhTw   string
-	PriceReference decimal.Decimal
-	PriceHighLimit decimal.Decimal
-	PriceLowLimit  decimal.Decimal
-	CanDayBuySell  bool
-	CanDaySellBuy  bool
-	CanShortMargin bool
-	CanShortLend   bool
-	VolumePerUnit  int
-	Currency       string
-	IsTerminated   bool
-	IsSuspended    bool
-	TypeZhTw       string
-	Abnormal       string
+	NameZhTw        string
+	Market          string
+	IndustryZhTw    string
+	PriceReference  decimal.Decimal
+	PriceHighLimit  decimal.Decimal
+	PriceLowLimit   decimal.Decimal
+	TradingUnit     int
+	CanDayBuySell   bool
+	CanDaySellBuy   bool
+	CanShortMargin  bool
+	CanShortLend    bool
+	Currency        string
+	IsNewlyCompiled bool
+	IsTerminated    bool
+	IsSuspended     bool
+	TypeZhTw        string
+	Abnormal        string
 }
 
 type Dealt struct {
 	At     time.Time
 	Price  decimal.Decimal
-	Unit   int
+	Bid    decimal.Decimal
+	Ask    decimal.Decimal
 	Volume int
 	Serial int
 }

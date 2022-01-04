@@ -101,3 +101,11 @@ func (cli *Client) Dealts(symbolID string, oddLot bool, limit int64, offset int6
 	params.Add("offset", strconv.FormatInt(offset, 10))
 	return cli.callAPI(baseUrl, params)
 }
+
+func (cli *Client) Volumes(symbolID string, oddLot bool) (*Response, error) {
+	baseUrl := fmt.Sprintf("https://%s/realtime/%s/intraday/volumes", cli.Host, cli.Version)
+	params := url.Values{}
+	params.Add("symbolId", symbolID)
+	params.Add("oddLot", strconv.FormatBool(oddLot))
+	return cli.callAPI(baseUrl, params)
+}

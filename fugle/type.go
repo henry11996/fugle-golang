@@ -94,9 +94,9 @@ type QuoteTrade struct {
 }
 
 type QuoteOrder struct {
-	At       time.Time
-	Bestbids []BestPrice
-	Bestasks []BestPrice
+	At   time.Time
+	Bids []BestPrice
+	Asks []BestPrice
 }
 
 type BestPrice struct {

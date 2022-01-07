@@ -31,7 +31,7 @@ func NewFugleClient(opts ClientOption) (Client, error) {
 		client.Host = "api.fugle.tw"
 	}
 	if client.Version == "" {
-		client.Version = "v0.2"
+		client.Version = "v0.3"
 	}
 	if client.ApiToken == "" {
 		return *client, errors.New("please provide fugle api token")
